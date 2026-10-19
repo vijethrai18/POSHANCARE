@@ -1,13 +1,13 @@
 # POSHANCARE 🌱
 
-**Anganwadi Nutrition & Child Health Management System**
+## Anganwadi Nutrition & Child Health Management System
 
 POSHANCARE is a web-based college project designed to help Anganwadi workers manage children's growth, nutrition, health records, and follow-ups in one place.
 
 ## Features
 
 - **Worker registration:** Workers can register and follow the admin approval workflow.
-- **Admin dashboard:** Manage worker approval through protected admin functionality.
+- **Admin dashboard:** Manage worker approvals through protected admin functionality.
 - **Child management:** Register children and maintain their unique Child IDs.
 - **Growth tracking:** Record height and weight and view growth history.
 - **Nutrition records:** Maintain nutrition-related information.
@@ -61,15 +61,15 @@ Install:
 
 ### 2. Configure PostgreSQL
 
-Create a database:
+Create the database:
 
 ```sql
 CREATE DATABASE poshancare_db;
 ```
 
-### 3. Configure environment variables
+### 3. Configure Environment Variables
 
-Set these variables in your local environment:
+Configure these variables in your local environment:
 
 | Variable | Purpose |
 |---|---|
@@ -82,7 +82,7 @@ Set these variables in your local environment:
 
 Use your own local values. Never commit real credentials, OTPs, or access tokens.
 
-### 4. Start the backend
+### 4. Start the Backend
 
 Open a terminal in `poshancare-backend-starter/poshancare-backend/` and run:
 
@@ -92,9 +92,9 @@ mvn spring-boot:run
 
 The backend uses port `8080` by default.
 
-### 5. Open the frontend
+### 5. Open the Frontend
 
-Open `frontend/index.html` in your browser, or use a local development server. Make sure the backend CORS configuration allows the frontend's actual origin.
+Open `frontend/index.html` in your browser or use a local development server. Ensure the backend CORS configuration allows the frontend's actual origin.
 
 ## Authentication Notes
 
