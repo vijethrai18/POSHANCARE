@@ -1,0 +1,15 @@
+$kind: collection
+name: Poshancare API
+description: |-
+  Poshancare backend API collection.
+
+  **Auth flow:**
+  1. Run **Request OTP** with worker mobile `9000000001`
+  2. Check the Spring Boot server logs for the 6-digit OTP
+  3. Run **Verify OTP** — the JWT token is auto-saved to `{{token}}`
+  4. All other requests inherit Bearer auth from the collection
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{token}}'

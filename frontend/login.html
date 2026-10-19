@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Login | POSHANCARE</title>
+  <meta name="description" content="Secure worker and parent access to POSHANCARE child records.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+  <header class="navbar">
+    <a class="brand" href="index.html">
+      <span class="brand-icon" aria-hidden="true">✿</span>
+      <span>POSHAN<span class="brand-accent">CARE</span></span>
+    </a>
+
+    <a class="back-link" href="index.html">
+      <span aria-hidden="true">←</span> Back to home
+    </a>
+  </header>
+
+  <main class="login-layout">
+    <section class="welcome-panel">
+      <span class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        YOUR CHILD'S WELLBEING MATTERS
+      </span>
+
+      <h1>
+        Care starts with
+        <span>connection.</span>
+      </h1>
+
+      <p class="welcome-description">
+        Securely access child growth records, nutrition information,
+        and follow-up details through POSHANCARE.
+      </p>
+
+      <div class="welcome-features">
+        <div class="feature">
+          <span class="feature-icon" aria-hidden="true">✓</span>
+          <div>
+            <strong>One child, one profile</strong>
+            <p>Keep every record connected to its Child ID.</p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <span class="feature-icon" aria-hidden="true">✓</span>
+          <div>
+            <strong>Simple, secure access</strong>
+            <p>Verify your registered mobile number to continue.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="welcome-note">
+        <span aria-hidden="true">🌱</span>
+        Supporting healthier childhoods, together.
+      </div>
+    </section>
+
+    <section class="form-section">
+      <div class="login-card">
+        <div class="login-symbol" aria-hidden="true">✿</div>
+
+        <div class="form-heading">
+          <span class="form-eyebrow">WELCOME BACK</span>
+          <h2 id="loginTitle">Sign in to POSHANCARE</h2>
+          <p id="loginDescription">
+            Enter your registered details to receive a verification code.
+          </p>
+        </div>
+
+        <form id="loginForm">
+          <div class="field-group" id="roleGroup">
+            <label for="role">Account type</label>
+            <select id="role" name="role" required>
+              <option value="WORKER">Anganwadi Worker</option>
+              <option value="PARENT">Parent / Guardian</option>
+            </select>
+          </div>
+
+          <div class="field-group" id="childIdGroup" hidden>
+            <label for="childId">Child ID</label>
+            <input
+              type="text"
+              id="childId"
+              name="childId"
+              placeholder="e.g. PC-XXXXXXXX"
+              autocomplete="off"
+            >
+            <small>Use the Child ID provided by your Anganwadi worker.</small>
+          </div>
+
+          <div class="field-group">
+            <label for="mobile">Registered mobile number</label>
+
+            <div class="mobile-input">
+              <span class="country-code">+91</span>
+              <input
+                type="tel"
+                id="mobile"
+                name="mobile"
+                placeholder="Enter 10-digit mobile number"
+                inputmode="numeric"
+                autocomplete="tel-national"
+                maxlength="10"
+                pattern="[6-9][0-9]{9}"
+                required
+              >
+            </div>
+
+            <small>Use the number registered with POSHANCARE.</small>
+          </div>
+
+          <div class="field-group" id="otpGroup" hidden>
+            <label for="otp">Verification code</label>
+            <input
+              type="text"
+              id="otp"
+              name="otp"
+              placeholder="Enter 6-digit OTP"
+              inputmode="numeric"
+              autocomplete="one-time-code"
+              maxlength="6"
+              pattern="[0-9]{6}"
+            >
+            <small id="otpHelp">
+              Enter the verification code from your authentication provider.
+            </small>
+          </div>
+
+          <p id="formMessage" class="form-message" role="status" aria-live="polite"></p>
+
+          <button type="submit" id="submitBtn" class="submit-button">
+            <span id="submitText">Request OTP</span>
+            <span aria-hidden="true">→</span>
+          </button>
+
+          <button type="button" id="resendBtn" class="resend-button" hidden>
+            Request a new OTP
+          </button>
+        </form>
+
+        <div class="security-note">
+          <span aria-hidden="true">🔒</span>
+          Your child records are accessible only through authorized accounts.
+        </div>
+      </div>
+
+      <p class="help-text">
+        Need help accessing your account?
+        <a href="index.html">Return to the home page</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© POSHANCARE</span>
+    <span>Care today. Healthier tomorrows.</span>
+  </footer>
+
+  <script src="login.js"></script>
+</body>
+</html>

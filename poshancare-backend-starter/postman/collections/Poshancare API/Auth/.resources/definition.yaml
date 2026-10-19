@@ -1,0 +1,5 @@
+$kind: collection
+name: Auth
+description: OTP-based authentication endpoints. These are public (no token needed).
+auth:
+  type: noauth

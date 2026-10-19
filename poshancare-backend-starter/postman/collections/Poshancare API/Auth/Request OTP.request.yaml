@@ -1,0 +1,15 @@
+$kind: http-request
+name: Request OTP
+order: 1000
+method: POST
+url: '{{base_url}}/api/auth/request-otp'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "mobile": "{{worker_mobile}}",
+      "role": "WORKER"
+    }

@@ -1,0 +1,41 @@
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Local and production configuration
+application-local.properties
+application-prod.properties
+
+# Java / Maven generated files
+**/target/
+*.class
+
+# Logs
+*.log
+logs/
+
+# IDE and operating system files
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Frontend dependencies and build output
+node_modules/
+dist/
+build/
+
+# Local database backups
+*.dump
+*.backup
+*.bak
+
+# Certificates and private keys
+*.pem
+*.key
+
+# Local backups containing pre-cleanup Postman tokens
+*.pre-github-backup

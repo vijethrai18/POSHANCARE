@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POSHANCARE | Administrator</title>
+  <link rel="stylesheet" href="admin.css">
+  <script src="admin.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">P</span>
+      <span>POSHANCARE<small>Administrator Portal</small></span>
+    </a>
+    <a class="back-link" href="index.html">← Home</a>
+  </header>
+
+  <main class="page">
+    <!-- Login screen -->
+    <section id="loginSection" class="login-layout">
+      <div class="intro">
+        <span class="eyebrow">ADMINISTRATION</span>
+        <h1>Manage worker registrations.</h1>
+        <p>Review applications from Anganwadi workers and approve or reject registrations.</p>
+        <div class="intro-note">
+          <span>✓</span>
+          <span>Only authorized administrators can manage applications.</span>
+        </div>
+      </div>
+
+      <form id="loginForm" class="panel login-panel">
+        <div class="panel-icon">🔐</div>
+        <h2>Administrator login</h2>
+        <p class="muted">Sign in with your administrator account.</p>
+
+        <label for="mobile">Registered mobile number</label>
+        <input
+          id="mobile"
+          name="mobile"
+          type="tel"
+          inputmode="numeric"
+          autocomplete="username"
+          placeholder="Enter mobile number"
+          pattern="[0-9]{10}"
+          maxlength="10"
+          required
+        >
+
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          placeholder="Enter administrator password"
+          required
+        >
+
+        <p id="loginMessage" class="message" role="status" aria-live="polite"></p>
+
+        <button id="loginButton" class="primary-button" type="submit">
+          Sign in
+        </button>
+
+        <p class="security-note">Your login is verified by the POSHANCARE backend.</p>
+      </form>
+    </section>
+
+    <!-- Dashboard screen: hidden until login succeeds -->
+    <section id="dashboardSection" class="dashboard" hidden>
+      <div class="dashboard-heading">
+        <div>
+          <span class="eyebrow">ADMIN DASHBOARD</span>
+          <h1>Worker registrations</h1>
+          <p class="muted">Review new applications before granting access.</p>
+        </div>
+        <button id="logoutButton" class="secondary-button" type="button">
+          Sign out
+        </button>
+      </div>
+
+      <div class="welcome-card">
+        <div class="avatar">A</div>
+        <div>
+          <span class="muted small">Signed in as administrator</span>
+          <h2 id="adminName">Administrator</h2>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card">
+          <span class="stat-label">Pending applications</span>
+          <strong id="pendingCount">—</strong>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Displayed below</span>
+          <strong id="displayedCount">—</strong>
+        </article>
+      </div>
+
+      <div class="section-heading">
+        <div>
+          <h2>Applications awaiting review</h2>
+          <p class="muted">Check the applicant and Anganwadi centre before deciding.</p>
+        </div>
+        <button id="refreshButton" class="secondary-button" type="button">
+          ↻ Refresh
+        </button>
+      </div>
+
+      <p id="dashboardMessage" class="message" role="status" aria-live="polite"></p>
+
+      <div id="applicationsList" class="applications-list">
+        <div class="empty-state">Sign in to load applications.</div>
+      </div>
+
+      <p class="footer-note">
+        POSHANCARE · Worker access is subject to administrator approval.
+      </p>
+    </section>
+  </main>
+</body>
+</html>

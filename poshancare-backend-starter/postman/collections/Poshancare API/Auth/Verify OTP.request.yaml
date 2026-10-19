@@ -1,0 +1,28 @@
+$kind: http-request
+name: Verify OTP
+order: 2000
+method: POST
+url: '{{base_url}}/api/auth/verify-otp'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "mobile": "{{worker_mobile}}",
+      "role": "WORKER",
+      "otp": "000000"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      // Auto-save the JWT token to the environment after a successful OTP verify
+      if (pm.response.code === 200) {
+          const body = pm.response.json();
+          if (body.token) {
+              pm.environment.set("token", body.token);
+              console.log("✅ Token saved to environment variable 'token'");
+          }
+      }

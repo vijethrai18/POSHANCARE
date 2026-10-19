@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POSHANCARE | Parent Dashboard</title>
+  <link rel="stylesheet" href="parent.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <span class="brand-icon">P</span>
+      <span>POSHANCARE<small>Child Health & Nutrition</small></span>
+    </a>
+
+    <div class="topbar-actions">
+      <button class="logout" id="logoutBtn" type="button">Logout</button>
+    </div>
+  </header>
+
+  <main class="dashboard">
+    <section class="welcome">
+      <div>
+        <p class="eyebrow">PARENT PORTAL</p>
+        <h1 id="pageTitle">Your child's health dashboard</h1>
+        <p id="pageDescription">
+          View your child's growth records and follow-up updates.
+        </p>
+      </div>
+      <div class="welcome-icon" aria-hidden="true">♡</div>
+    </section>
+
+    <section id="lookupPanel" class="panel lookup-panel" hidden>
+      <h2 id="lookupTitle">Find your child's profile</h2>
+      <p id="lookupDescription">
+        Sign in with your registered mobile number and Child ID.
+      </p>
+      <p class="muted">
+        Parent access is linked to the Child ID verified during login.
+      </p>
+      <button id="reloadProfileBtn" class="btn btn-primary" type="button">
+        Load my child's profile
+      </button>
+      <p id="lookupMessage" class="message" role="status"></p>
+    </section>
+
+    <section id="profilePanel" hidden>
+      <section class="panel child-header">
+        <div>
+          <p class="eyebrow">CHILD PROFILE</p>
+          <h2 id="childName">Loading...</h2>
+          <p id="childMeta" class="muted"></p>
+        </div>
+        <div class="risk-card">
+          <span class="muted">Growth assessment</span>
+          <strong id="riskStatus">Not assessed</strong>
+          <small>For health guidance, consult your Anganwadi worker.</small>
+        </div>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <span class="stat-icon height-icon">↕</span>
+          <p>Latest height</p>
+          <strong id="childHeight">—</strong>
+          <small>Centimetres</small>
+        </article>
+        <article class="stat-card">
+          <span class="stat-icon weight-icon">⚖</span>
+          <p>Latest weight</p>
+          <strong id="childWeight">—</strong>
+          <small>Kilograms</small>
+        </article>
+        <article class="stat-card">
+          <span class="stat-icon date-icon">▦</span>
+          <p>Last measurement</p>
+          <strong id="measurementDate">—</strong>
+          <small>Most recent record</small>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">GROWTH TRACKING</p>
+            <h2>Growth history</h2>
+            <p class="muted">
+              Track the height and weight measurements recorded over time.
+            </p>
+          </div>
+        </div>
+
+        <div class="growth-chart-container">
+          <h3>Growth progress</h3>
+          <p class="muted chart-description">
+            Each point represents a recorded measurement.
+          </p>
+          <div class="chart-area">
+            <canvas
+              id="parentGrowthChart"
+              role="img"
+              aria-label="Chart showing recorded height and weight measurements over time">
+            </canvas>
+          </div>
+          <p id="parentChartMessage" class="muted" role="status">
+            Loading growth chart...
+          </p>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Height (cm)</th>
+                <th>Weight (kg)</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody id="growthBody">
+              <tr>
+                <td colspan="4" class="table-message">Loading records...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p id="noMeasurements" class="muted" hidden>
+          No growth measurements have been recorded yet.
+        </p>
+      </section>
+
+
+        <section class="dashboard-card">
+        <h3>Nutrition Records</h3>
+        <p class="muted">
+            View nutrition information recorded by your Anganwadi worker.
+        </p>
+        <p id="nutritionMessage" class="muted" aria-live="polite"></p>
+        <h3>Latest Nutrition Summary</h3>
+
+<p class="muted">
+  Summary of the latest nutrition record entered by your Anganwadi worker.
+</p>
+
+<div id="parentNutritionSummary" aria-live="polite">
+  <p class="muted">Loading nutrition summary...</p>
+</div>
+        <div id="nutritionContent" aria-live="polite">
+            <p class="muted">Loading nutrition records...</p>
+        </div>
+      </section>
+
+
+      <section class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">CARE & FOLLOW-UP</p>
+            <h2>Follow-up updates</h2>
+            <p class="muted">
+              Review follow-up notes recorded by your Anganwadi worker.
+            </p>
+          </div>
+        </div>
+        <div id="followupContent">
+          <p class="muted">Loading follow-up records...</p>
+        </div>
+      </section>
+
+      <div class="page-actions">
+        <button id="changeProfileBtn" class="btn btn-secondary" type="button">
+          Refresh records
+        </button>
+      </div>
+    </section>
+
+    <p id="pageMessage" class="message" role="status"></p>
+  </main>
+
+  <footer class="footer">
+    <p>POSHANCARE · Supporting child health and nutrition</p>
+  </footer>
+
+  <!-- Load Chart.js before parent.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="parent.js"></script>
+</body>
+</html>

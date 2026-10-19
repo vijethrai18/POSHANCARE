@@ -1,0 +1,20 @@
+$kind: http-request
+name: Create Child
+order: 1000
+method: POST
+url: '{{base_url}}/api/children'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Rahul Test",
+      "dateOfBirth": "2023-04-12",
+      "guardianName": "Test Parent Two",
+      "guardianMobile": "9000000003",
+      "gender": "Male",
+      "centreName": "Demo Anganwadi Centre",
+      "createdByWorkerId": "{{worker_id}}"
+    }

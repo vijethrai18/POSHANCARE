@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Worker Registration | POSHANCARE</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #f3f7f5;
+      color: #20352b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      background: #ffffff;
+      padding: 32px;
+      border-radius: 18px;
+      box-shadow: 0 12px 35px rgba(22, 60, 42, 0.09);
+    }
+
+    .brand {
+      color: #168354;
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 28px;
+    }
+
+    .description {
+      color: #65736b;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 7px;
+    }
+
+    input, select {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      margin-bottom: 19px;
+      border: 1px solid #d5dfd9;
+      border-radius: 9px;
+      background: #fff;
+      color: #20352b;
+      font-size: 15px;
+    }
+
+    input:focus, select:focus {
+      outline: 2px solid #a7e4c5;
+      border-color: #168354;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 9px;
+      background: #168354;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #116b43;
+    }
+
+    button:disabled {
+      opacity: 0.65;
+      cursor: wait;
+    }
+
+    .notice {
+      background: #f0f8f3;
+      border: 1px solid #d6ebdd;
+      color: #315b43;
+      padding: 12px;
+      border-radius: 9px;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 22px;
+    }
+
+    #message {
+      margin-top: 18px;
+      line-height: 1.6;
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    .success {
+      color: #137447;
+    }
+
+    .error {
+      color: #b42318;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 22px;
+      color: #168354;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 23px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <div class="brand">POSHANCARE</div>
+
+    <h1>Worker Registration</h1>
+
+    <p class="description">
+      Register as an Anganwadi worker. Your application will
+      be reviewed by the administrator before account access
+      is approved.
+    </p>
+
+    <div class="notice">
+      <strong>Important:</strong> Submitting this form does not
+      immediately grant dashboard access. Your application
+      must be approved first.
+    </div>
+
+    <form id="registrationForm">
+      <label for="fullName">Full name</label>
+      <input
+        id="fullName"
+        name="fullName"
+        type="text"
+        maxlength="100"
+        autocomplete="name"
+        placeholder="Enter your full name"
+        required
+      >
+
+      <label for="mobile">Mobile number</label>
+      <input
+        id="mobile"
+        name="mobile"
+        type="tel"
+        inputmode="numeric"
+        pattern="[0-9]{10}"
+        maxlength="10"
+        autocomplete="tel"
+        placeholder="Enter 10-digit mobile number"
+        title="Enter a 10-digit mobile number"
+        required
+      >
+
+      <label for="centreName">Anganwadi centre name</label>
+      <input
+        id="centreName"
+        name="centreName"
+        type="text"
+        maxlength="150"
+        placeholder="Enter your centre name"
+        required
+      >
+
+      <label for="preferredLanguage">Preferred language</label>
+      <select id="preferredLanguage" name="preferredLanguage" required>
+        <option value="en">English</option>
+        <option value="kn">Kannada</option>
+        <option value="ml">Malayalam</option>
+        <option value="hi">Hindi</option>
+      </select>
+
+      <button id="submitButton" type="submit">
+        Submit Registration
+      </button>
+
+      <p id="message" role="status" aria-live="polite"></p>
+    </form>
+
+    <a class="back-link" href="index.html">
+      ← Back to Home
+    </a>
+  </main>
+
+  <script>
+    const API_BASE_URL = "http://localhost:8080/api";
+
+    const form = document.getElementById("registrationForm");
+    const submitButton = document.getElementById("submitButton");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!form.reportValidity()) {
+        return;
+      }
+
+      const formData = new FormData(form);
+
+      const workerData = {
+        fullName: String(formData.get("fullName")).trim(),
+        mobile: String(formData.get("mobile")).trim(),
+        centreName: String(formData.get("centreName")).trim(),
+        preferredLanguage: String(
+          formData.get("preferredLanguage")
+        )
+      };
+
+      if (!/^[0-9]{10}$/.test(workerData.mobile)) {
+        message.className = "error";
+        message.textContent = "Enter a valid 10-digit mobile number.";
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Submitting...";
+      message.className = "";
+      message.textContent = "Submitting your application...";
+
+      try {
+        const response = await fetch(
+          `${API_BASE_URL}/auth/worker-register`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify(workerData)
+          }
+        );
+
+        const responseText = await response.text();
+        let result = {};
+
+        if (responseText) {
+          try {
+            result = JSON.parse(responseText);
+          } catch {
+            result = { message: responseText };
+          }
+        }
+
+        if (!response.ok) {
+          throw new Error(
+            result.message ||
+            result.error ||
+            `Registration failed (HTTP ${response.status}).`
+          );
+        }
+
+        form.reset();
+        message.className = "success";
+        message.textContent =
+          result.message ||
+          "Registration submitted successfully. Your application " +
+          "has been sent to the administrator for review.";
+
+      } catch (error) {
+        message.className = "error";
+
+        if (error instanceof TypeError) {
+          message.textContent =
+            "Could not connect to the backend. Check that Spring " +
+            "Boot is running on port 8080 and that CORS is configured.";
+        } else {
+          message.textContent = error.message;
+        }
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Submit Registration";
+      }
+    });
+  </script>
+</body>
+</html>

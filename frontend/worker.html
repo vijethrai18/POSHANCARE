@@ -1,0 +1,511 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Worker Dashboard | POSHANCARE</title>
+  <link rel="stylesheet" href="worker.css">
+</head>
+
+<body>
+  <div class="app-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <a class="brand" href="index.html">
+        <span class="brand-icon">✚</span>
+        <span>POSHAN<span class="brand-light">CARE</span>
+        <small>CHILD HEALTH SYSTEM</small></span>
+      </a>
+
+      <div class="sidebar-profile">
+        <div class="avatar">AW</div>
+        <div>
+          <strong>Anganwadi Worker</strong>
+          <small>Worker workspace</small>
+        </div>
+      </div>
+
+      <p class="nav-heading">WORKSPACE</p>
+
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <a class="nav-link active" href="#dashboard">
+          <span data-i18n="dashboard" class="nav-icon">▦</span>
+          Dashboard
+        </a>
+        <a class="nav-link" href="#childRecords">
+          <span class="nav-icon">♧</span>
+          Child Records
+        </a>
+        <a class="nav-link" href="#childRecords" id="sidebarRegisterBtn">
+          <span data-i18n="registerChild" class="nav-icon">＋</span>
+          Register Child
+        </a>
+        <a class="nav-link" href="#detailPanel">
+          <span class="nav-icon">♡</span>
+          Growth & Follow-ups
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-help">
+          <span class="help-icon">i</span>
+          <div>
+            <strong>Need assistance?</strong>
+            <small>Contact your project administrator.</small>
+          </div>
+        </div>
+
+        <a class="logout" href="index.html">
+          <span>↪</span> Logout
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main workspace -->
+    <main class="main-area" id="dashboard">
+
+      <header class="topbar">
+        <div class="breadcrumb">
+          <span>Workspace</span>
+          <span class="breadcrumb-divider">/</span>
+          <strong>Dashboard</strong>
+        </div>
+
+        <div class="top-actions">
+          <span class="system-status">
+            <span class="status-dot"></span>
+            Child health management
+          </span>
+        </div>
+
+      </header>
+      <div class="page-content">
+
+        <!-- Welcome -->
+        <section class="welcome">
+          <div>
+            <p class="eyebrow">ANGANWADI WORKSPACE</p>
+            <h1>Good to see you!</h1>
+            <p>Manage child profiles, record growth measurements and organise follow-ups.</p>
+          </div>
+
+          <button class="primary-btn" id="showFormBtn" type="button">
+            <span>＋</span> Register Child
+          </button>
+        </section>
+
+        <!-- Statistics -->
+        <section class="stats" aria-label="Child statistics">
+
+          <article class="stat-card stat-total">
+            <div class="stat-top">
+              <span class="stat-label">Total Children</span>
+              <span class="stat-icon">♧</span>
+            </div>
+            <strong id="totalChildren">0</strong>
+            <small>Registered child profiles</small>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-top">
+              <span class="stat-label">Normal</span>
+              <span class="stat-icon icon-green">✓</span>
+            </div>
+            <strong id="normalCount">0</strong>
+            <small>Recorded status only</small>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-top">
+              <span class="stat-label">Monitor</span>
+              <span class="stat-icon icon-amber">◷</span>
+            </div>
+            <strong id="monitorCount">0</strong>
+            <small>Recorded status only</small>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-top">
+              <span class="stat-label">Follow-up</span>
+              <span class="stat-icon icon-blue">↗</span>
+            </div>
+            <strong id="highCount">0</strong>
+            <small>Check follow-up records</small>
+          </article>
+
+        </section>
+
+        <!-- Registration -->
+        <section class="panel registration-panel"
+          id="registrationPanel" hidden>
+
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">NEW PROFILE</p>
+              <h2>Register a Child</h2>
+              <p>Enter the child's details to create a profile.</p>
+            </div>
+
+            <button class="icon-btn" id="closeFormBtn"
+              type="button" aria-label="Close registration form">✕</button>
+          </div>
+
+          <form id="childForm">
+            <div class="form-grid">
+
+              <label>
+                Child's full name
+                <input name="name" required maxlength="100"
+                  autocomplete="off" placeholder="Enter full name">
+              </label>
+
+              <label>
+                Date of birth
+                <input name="dob" type="date" required>
+              </label>
+
+              <label>
+                Parent / guardian name
+                <input name="guardian" required maxlength="100"
+                  placeholder="Enter guardian name">
+              </label>
+
+              <label>
+                Registered mobile number
+                <input name="mobile" type="tel" required
+                  inputmode="numeric" pattern="[0-9]{10}" maxlength="10"
+                  placeholder="10-digit mobile number">
+              </label>
+
+              <label>
+                Gender
+                <select name="gender" required>
+                  <option value="">Select gender</option>
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Other">Other</option>
+                  <option value="Prefer not to say">Prefer not to say</option>
+                </select>
+              </label>
+
+              <label>
+                Anganwadi centre
+                <input name="centre" required maxlength="120"
+                  placeholder="Enter centre name">
+              </label>
+
+            </div>
+
+            <p class="form-note">
+              Each child should be registered only once.
+              The system should assign the permanent Child ID.
+            </p>
+
+            <div class="form-actions">
+              <button class="secondary-btn" id="closeFormBtnAlt"
+                type="button">Cancel</button>
+              <button class="primary-btn" type="submit">
+                Save Child Profile
+              </button>
+            </div>
+
+            <p id="formMessage" class="message" role="status"
+              aria-live="polite"></p>
+          </form>
+        </section>
+
+        <!-- Child records -->
+        <section class="panel records-panel" id="childRecords">
+
+          <div class="panel-heading records-heading">
+            <div>
+              <p class="eyebrow">RECORD MANAGEMENT</p>
+              <h2 data-i18n="childRecords">Child Records</h2>
+              <p>Find a child and open their profile to manage records.</p>
+            </div>
+
+            <span class="records-label">Child directory</span>
+          </div>
+
+          <div class="toolbar">
+            <div class="search-box">
+              <span aria-hidden="true">⌕</span>
+              <input id="searchInput" type="search"
+                placeholder="Search name or Child ID..."
+                aria-label="Search children">
+            </div>
+
+            <select id="riskFilter" aria-label="Filter by recorded status">
+              <option value="All">All statuses</option>
+              <option value="Normal">Normal</option>
+              <option value="Monitor">Monitor</option>
+              <option value="High Risk">High Risk</option>
+              <option value="Not assessed">Not assessed</option>
+            </select>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>CHILD</th>
+                  <th>CHILD ID</th>
+                  <th>HEIGHT</th>
+                  <th>WEIGHT</th>
+                  <th>RECORDED STATUS</th>
+                  <th>ACTION</th>
+                </tr>
+              </thead>
+              <tbody id="childTableBody"></tbody>
+            </table>
+          </div>
+
+          <p id="emptyMessage" class="empty-message" hidden>
+            No child records found. Register a child to get started.
+          </p>
+        </section>
+
+        <!-- Child details -->
+        <section class="panel detail-panel" id="detailPanel" hidden>
+
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">CHILD PROFILE</p>
+              <h2 id="detailTitle">Child Details</h2>
+              <p id="detailSubtitle"></p>
+            </div>
+
+            <button class="icon-btn" id="closeDetailBtn"
+              type="button" aria-label="Close child details">✕</button>
+          </div>
+
+          <form id="measurementForm">
+            <input type="hidden" name="childId">
+
+            <h3 class="section-subtitle">Record Growth Measurement</h3>
+
+            <div class="form-grid">
+
+              <label>
+                Measurement date
+                <input type="date" name="date" required>
+              </label>
+
+              <label>
+                Height (cm)
+                <input type="number" name="height" min="30" max="200"
+                  step="0.1" required placeholder="e.g. 95.5">
+              </label>
+
+              <label>
+                Weight (kg)
+                <input type="number" name="weight" min="1" max="150"
+                  step="0.1" required placeholder="e.g. 14.2">
+              </label>
+
+              <label>
+                Nutrition notes
+                <input name="notes" maxlength="500"
+                  placeholder="Optional observations">
+              </label>
+
+            </div>
+
+            <p class="form-note">
+              Measurements are recorded for monitoring. This prototype
+              does not independently diagnose or classify a child's health.
+            </p>
+
+            <button class="primary-btn" type="submit">
+              Save Measurement
+            </button>
+
+            <p id="measurementMessage" class="message"
+              role="status" aria-live="polite"></p>
+          </form>
+          <div class="history">
+
+            <!-- Growth chart -->
+            <h3 class="section-subtitle">Growth Progress</h3>
+            <p class="form-note">
+              View recorded height and weight measurements over time.
+            </p>
+
+            <div class="growth-chart-container">
+              <canvas
+                id="growthChart"
+                role="img"
+                aria-label="Chart showing the child's recorded height and weight over time">
+              </canvas>
+              <p id="chartMessage" class="message" role="status">
+                Select a child to view growth progress.
+              </p>
+            </div>
+
+            <!-- Existing measurement history -->
+            <h3 class="section-subtitle" data-i18n="growthHistory">
+              Growth History
+            </h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>DATE</th>
+                    <th>HEIGHT</th>
+                    <th>WEIGHT</th>
+                    <th>NOTES</th>
+                  </tr>
+                </thead>
+                <tbody id="historyBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="followup">
+            <h3 class="section-subtitle" data-i18n="followUps">
+              Follow-up Notes
+            </h3>
+
+            <label>
+              Follow-up note
+              <textarea id="followupNote" rows="3" maxlength="500"
+                placeholder="Enter a follow-up reminder"></textarea>
+            </label>
+
+            <button class="secondary-btn" id="saveFollowupBtn"
+              type="button">Save Follow-up Note</button>
+
+            <p id="followupMessage" class="message"
+              role="status" aria-live="polite"></p>
+          </div>
+
+          <!-- Nutrition Records -->
+          <div class="nutrition-section">
+            <h3 class="section-subtitle" data-i18n="nutritionRecords">
+              Nutrition Records
+            </h3>
+            <p class="form-note">
+              Record nutrition information for the selected child.
+              These details will be available on the Parent Dashboard.
+            </p>
+
+            <form id="nutritionForm">
+              <input type="hidden" name="childId">
+
+
+            <div class="form-grid">
+              <label>
+                Record date
+                <input type="date" name="recordDate" required>
+              </label>
+
+              <label>
+                Food consumed
+                <input name="foodConsumed" maxlength="500"
+                  placeholder="Food or meals consumed">
+              </label>
+
+              <label>
+                Calories consumed (kcal)
+                <input type="number" name="caloriesConsumedKcal"
+                  min="0" step="0.1" placeholder="Optional">
+              </label>
+
+              <label>
+                Calories required (kcal)
+                <input type="number" name="caloriesRequiredKcal"
+                  min="0" step="0.1" placeholder="Optional">
+              </label>
+
+              <label>
+                Protein consumed (g)
+                <input type="number" name="proteinConsumedG"
+                  min="0" step="0.1" placeholder="Optional">
+              </label>
+
+              <label>
+                Protein required (g)
+                <input type="number" name="proteinRequiredG"
+                  min="0" step="0.1" placeholder="Optional">
+              </label>
+
+              <label>
+                Carbohydrates consumed (g)
+                <input type="number" name="carbsConsumedG"
+                  min="0" step="0.1" placeholder="Optional">
+              </label>
+
+              <label>
+                Carbohydrates required (g)
+                <input type="number" name="carbsRequiredG"
+                  min="0" step="0.1" placeholder="Optional">
+              </label>
+
+              <label>
+                Notes
+                <textarea name="notes" rows="3" maxlength="500"
+                  placeholder="Optional nutrition observations"></textarea>
+              </label>
+            </div>
+
+
+              <button class="primary-btn" type="submit">
+                Save Nutrition Record
+              </button>
+
+              <p id="nutritionMessage" class="message"
+                role="status" aria-live="polite"></p>
+            </form>
+
+
+<!-- Nutrition Summary -->
+<h3 class="section-subtitle">Latest Nutrition Summary</h3>
+<p class="form-note">
+  Summary of the latest nutrition record entered by the worker.
+  Comparisons use the requirements recorded for that entry.
+</p>
+
+<div id="nutritionSummary" class="nutrition-summary" aria-live="polite">
+  <p class="form-note">Select a child to view the nutrition summary.</p>
+</div>
+
+<!-- Existing Nutrition History -->
+<h3 class="section-subtitle nutrition-history-heading">
+  Nutrition History
+</h3>
+
+<div id="nutritionHistory">
+  <p class="form-note">Select a child to view nutrition history.</p>
+</div>
+
+          </div>
+
+        </section>
+
+        <footer class="page-footer">
+          <span>POSHANCARE</span>
+          <span>Child Health & Nutrition Management</span>
+        </footer>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="worker.js"></script>
+
+  <script>
+    // Extra registration shortcuts; preserve the existing worker.js IDs.
+    document.getElementById("sidebarRegisterBtn").addEventListener("click", function () {
+      document.getElementById("showFormBtn").click();
+    });
+
+    document.getElementById("closeFormBtnAlt").addEventListener("click", function () {
+      document.getElementById("closeFormBtn").click();
+    });
+  </script>
+</body>
+</html>

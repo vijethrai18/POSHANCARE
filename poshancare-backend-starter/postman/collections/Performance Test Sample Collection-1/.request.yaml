@@ -1,0 +1,28 @@
+﻿$kind: http-request
+name: ""
+url: http://localhost:8080/api/children
+method: POST
+body:
+  type: json
+  content: "\r
+
+    {\r
+
+    \  \"name\": \"Rahul Test\",\r
+
+    \  \"dateOfBirth\": \"2023-04-12\",\r
+
+    \  \"guardianName\": \"Test Parent Two\",\r
+
+    \  \"guardianMobile\": \"9000000003\",\r
+
+    \  \"gender\": \"Male\",\r
+
+    \  \"centreName\": \"Demo Anganwadi Centre\"\r
+
+    }\r\n"
+auth:
+  type: bearer
+  credentials:
+  token: ''
+order: 1000
