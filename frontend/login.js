@@ -27,6 +27,7 @@ const initialRole = params.get("role");
 
 if (initialRole === "WORKER" || initialRole === "PARENT") {
   roleSelect.value = initialRole;
+  
 }
 
 // Display the correct fields for each role
@@ -265,5 +266,11 @@ resendBtn.addEventListener("click", async () => {
 // Changing role resets the login flow
 roleSelect.addEventListener("change", updateRoleFields);
 
-// Initialize the page
+// Initialize the page using the selected role
 updateRoleFields();
+
+// Restore the role passed from the homepage
+if (initialRole === "WORKER" || initialRole === "PARENT") {
+  roleSelect.value = initialRole;
+  updateRoleFields();
+}

@@ -84,7 +84,7 @@ document.getElementById("workerBtn").addEventListener("click", () => {
 });
 
 document.getElementById("parentBtn").addEventListener("click", () => {
-  window.location.href = "parent.html";
+  window.location.href = "login.html?role=PARENT";
 });
 
 document.getElementById("adminBtn").addEventListener("click", () => {
