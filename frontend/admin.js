@@ -1,7 +1,7 @@
 
 "use strict";
 
-const API_BASE = "http://localhost:8080/api";
+const API_BASE = "https://poshancare.onrender.com/api";
 
 const loginSection = document.getElementById("loginSection");
 const dashboardSection = document.getElementById("dashboardSection");

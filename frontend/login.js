@@ -1,6 +1,5 @@
 
-const API_BASE_URL = "http://localhost:8080/api";
-
+const API_BASE_URL = "https://poshancare.onrender.com/api";
 // HTML elements
 const loginForm = document.getElementById("loginForm");
 const roleSelect = document.getElementById("role");
@@ -108,6 +107,10 @@ async function requestOtp() {
         body: JSON.stringify(payload)
       }
     );
+
+  console.log("OTP request URL:", `${API_BASE_URL}/auth/request-otp`);
+  console.log("OTP response status:", response.status);
+  console.log("OTP response body:", await response.clone().text());
 
     const data = await response.json().catch(() => ({}));
 
